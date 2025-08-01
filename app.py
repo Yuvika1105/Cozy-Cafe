@@ -4,11 +4,6 @@ import os
 app = Flask(__name__)
 
 def load_menu():
-    """
-    Loads the menu from a specified text file.
-    Expected format: ItemName,Price (one item per line)
-    Returns a dictionary with item names (Title Case) as keys and prices as values.
-    """
     menu_filepath = os.path.join(os.path.dirname(__file__), 'menu.txt')
     menu_data = {}
     try:
@@ -33,18 +28,10 @@ def load_menu():
 
 @app.route('/')
 def index():
-    """
-    Renders the main HTML page for the kiosk.
-    This is the first page the user sees.
-    """
     return render_template('index.html')
 
 @app.route('/api/menu', methods=['GET'])
 def get_menu():
-    """
-    API endpoint that returns the menu as a JSON object.
-    The frontend JavaScript will call this to display the menu.
-    """
     menu_data = load_menu()
     if menu_data is None:
         return jsonify({'error': 'Menu not found'}), 500
