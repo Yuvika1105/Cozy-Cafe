@@ -16,7 +16,8 @@ A charming little web-based cafe ordering system designed for **simplicity**, **
 
 ## 📸 Preview
 
-![Cozy Cafe Screenshot](https://github.com/Yuvika1105/Cozy-Cafe/blob/main/preview.png)
+<img width="1919" height="1072" alt="image" src="https://github.com/user-attachments/assets/d5d83eac-1148-4309-b9eb-f637e347198f" />
+
 
 ---
 
