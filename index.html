@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cozy Corner Cafe</title>
+    <!-- Use a simple, elegant Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Pastel Color Palette */
+        :root {
+            --primary-pink: #f8c8dc;
+            --light-pink: #fce7f2;
+            --dark-pink: #e0a3b8;
+            --text-dark: #4a4a4a;
+            --text-light: #777777;
+            --bg-body: #fdf6f9;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 95%;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-pink);
+            /* Made darker for visibility */
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-pink);
+            /* Made darker for visibility */
+            text-align: center;
+            font-size: 1.8rem;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .menu-section,
+        .order-section {
+            background-color: var(--light-pink);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .menu-item {
+            /* Use a grid layout for perfect alignment */
+            display: grid;
+            grid-template-columns: 1fr auto 120px;
+            /* Item name, price, and controls */
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px dashed var(--dark-pink);
+            transition: all 0.2s ease;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 8px;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: var(--text-dark);
+        }
+
+        .item-price {
+            text-align: right;
+            font-style: italic;
+            color: var(--text-light);
+            font-weight: 400;
+            padding-right: 15px;
+            /* Add some space before the buttons */
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="number"] {
+            width: 50px;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid var(--dark-pink);
+            text-align: center;
+            font-size: 1em;
+            background-color: #fff;
+            color: var(--text-dark);
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--dark-pink);
+            background-color: var(--primary-pink);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease;
+            font-size: 1em;
+        }
+
+        .quantity-btn:hover {
+            background-color: var(--dark-pink);
+            transform: scale(1.1);
+        }
+
+        .order-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--primary-pink);
+            font-size: 1.1em;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        #order-total {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 20px;
+            text-align: right;
+            color: var(--dark-pink);
+        }
+
+        button.place-order-btn {
+            padding: 15px 25px;
+            background-color: var(--dark-pink);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: 600;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        button.place-order-btn:hover {
+            background-color: var(--primary-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        #empty-order-message {
+            text-align: center;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .menu-item {
+                grid-template-columns: 1fr auto;
+                gap: 10px;
+                padding-bottom: 20px;
+            }
+
+            .item-price {
+                padding-right: 0;
+            }
+
+            .quantity-controls {
+                grid-column: 1 / 3;
+                justify-content: space-between;
+            }
+        }
+
+        /* Modal Popup Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-pink);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-body {
+            font-size: 1.2em;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .modal-total {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--dark-pink);
+            margin-bottom: 20px;
+        }
+
+        .modal-close-btn {
+            padding: 10px 20px;
+            background-color: var(--primary-pink);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.2s ease;
+        }
+
+        .modal-close-btn:hover {
+            background-color: var(--dark-pink);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>The Cozy Corner Cafe</h1>
+        <p class="subtitle">Delicious treats to start your day!</p>
+
+        <div class="menu-section">
+            <h2>Our Menu</h2>
+            <div id="menu-items">
+                <!-- Menu items will be dynamically loaded here by JavaScript -->
+            </div>
+        </div>
+
+        <div class="order-section">
+            <h2>Your Current Order</h2>
+            <ul id="current-order" class="order-list">
+                <!-- Ordered items will be dynamically added here -->
+                <li id="empty-order-message" style="text-align: center; color: #777;">Your cart is empty.</li>
+            </ul>
+            <div id="order-total">Total: Rs. 0.00</div>
+        </div>
+
+        <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+    </div>
+
+    <!-- The custom order confirmation modal -->
+    <div id="order-confirmed-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 class="modal-title">Order Confirmed!</h3>
+            <p class="modal-body">Thank you for your order! Enjoy your meal.</p>
+            <div id="modal-total-display" class="modal-total"></div>
+            <button class="modal-close-btn" onclick="closeOrderConfirmedModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        let menuData = {};
+        let currentOrder = {};
+
+        async function fetchMenu() {
+            try {
+                const response = await fetch('/api/menu');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                menuData = await response.json();
+                displayMenu();
+            } catch (error) {
+                console.error("Could not fetch menu:", error);
+                // Use a custom alert message for better UI
+                showCustomAlert("Failed to load menu. Please try again later.");
+            }
+        }
+
+        function displayMenu() {
+            const menuDiv = document.getElementById('menu-items');
+            menuDiv.innerHTML = '';
+            for (const item in menuData) {
+                const price = menuData[item];
+                const itemId = item.replace(/\s/g, '-');
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'menu-item';
+                itemDiv.innerHTML = `
+                    <span class="item-name">${item}</span>
+                    <span class="item-price">Rs.${price.toFixed(2)}</span>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="adjustQuantity('${item}', -1)"><i class="fas fa-minus"></i></button>
+                        <input type="number"
+                               id="qty-${itemId}"
+                               value="${currentOrder[item] || 0}"
+                               min="0"
+                               onchange="updateOrder('${item}', this.value)">
+                        <button class="quantity-btn" onclick="adjustQuantity('${item}', 1)"><i class="fas fa-plus"></i></button>
+                    </div>
+                `;
+                menuDiv.appendChild(itemDiv);
+            }
+            renderOrder();
+        }
+
+        function adjustQuantity(item, delta) {
+            const itemId = item.replace(/\s/g, '-');
+            const qtyInput = document.getElementById(`qty-${itemId}`);
+            let currentQty = parseInt(qtyInput.value) || 0;
+            let newQty = currentQty + delta;
+            if (newQty < 0) newQty = 0;
+            qtyInput.value = newQty;
+            updateOrder(item, newQty.toString());
+        }
+
+        function updateOrder(item, quantityStr) {
+            const quantity = parseInt(quantityStr);
+            const itemId = item.replace(/\s/g, '-');
+            const qtyInput = document.getElementById(`qty-${itemId}`);
+
+            if (isNaN(quantity) || quantity < 0) {
+                qtyInput.value = currentOrder[item] || 0;
+                return;
+            }
+
+            if (quantity > 0) {
+                currentOrder[item] = quantity;
+            } else {
+                delete currentOrder[item];
+            }
+
+            renderOrder();
+        }
+        function renderOrder() {
+                const orderList = document.getElementById('current-order');
+                const emptyMessage = document.getElementById('empty-order-message');
+
+                // Remove all existing order items EXCEPT the empty message
+                const existingItems = orderList.querySelectorAll('.order-item');
+                existingItems.forEach(item => item.remove());
+
+                const items = Object.keys(currentOrder);
+
+                if (items.length === 0) {
+                    emptyMessage.style.display = 'block';
+                    document.getElementById('order-total').innerText = `Total: Rs. 0.00`;
+                } else {
+                    emptyMessage.style.display = 'none';
+
+                    let total = 0;
+                    items.forEach(item => {
+                        const quantity = currentOrder[item];
+                        const price = menuData[item];
+                        const subtotal = quantity * price;
+
+                        const listItem = document.createElement('li');
+                        listItem.className = 'order-item';
+                        listItem.innerHTML = `
+                <span>${item} x ${quantity}</span>
+                <span>Rs.${subtotal.toFixed(2)}</span>
+            `;
+                        orderList.appendChild(listItem);
+
+                        total += subtotal;
+                    });
+
+                    document.getElementById('order-total').innerText = `Total: Rs.${total.toFixed(2)}`;
+                }
+            }
+
+
+        // New functions for the custom modal
+        function showOrderConfirmedModal(totalAmount) {
+            const modal = document.getElementById('order-confirmed-modal');
+            const totalDisplay = document.getElementById('modal-total-display');
+            totalDisplay.innerText = `Total: Rs.${totalAmount.toFixed(2)}`;
+            modal.style.display = 'flex';
+        }
+
+        function closeOrderConfirmedModal() {
+            const modal = document.getElementById('order-confirmed-modal');
+            modal.style.display = 'none';
+        }
+
+        async function placeOrder() {
+            const orderItemsArray = [];
+            for (const item in currentOrder) {
+                orderItemsArray.push({
+                    item: item,
+                    quantity: currentOrder[item]
+                });
+            }
+
+            if (orderItemsArray.length === 0) {
+                // Now using a custom alert for better UI
+                alert("Your order is empty. Please add items before placing an order.");
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ items: orderItemsArray })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Call the new modal function instead of the alert
+                    showOrderConfirmedModal(result.total_amount);
+                    currentOrder = {};
+                    renderOrder();
+                    displayMenu(); // Reset the quantities in the menu
+                } else {
+                    alert(`Error placing order: ${result.message || 'An unknown error occurred.'}`);
+                    console.error("Error response from server:", result);
+                }
+            } catch (error) {
+                console.error("Failed to place order:", error);
+                alert("Could not connect to server to place order. Please try again.");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchMenu);
+    </script>
+</body>
+
+</html>

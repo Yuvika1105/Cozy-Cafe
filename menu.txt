@@ -1,0 +1,7 @@
+Pizza,50
+Burger,30
+Sandwich,35
+Salad,60
+Coffee,40
+Fries,25
+Soda,20
