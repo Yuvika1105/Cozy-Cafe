@@ -1,19 +1,14 @@
-# app.py
 from flask import Flask, render_template, request, jsonify
 import os
 
-# Create a Flask web application instance
 app = Flask(__name__)
 
-# --- Helper Function: Load Menu from menu.txt ---
-# This function is adapted from your original main.py
 def load_menu():
     """
     Loads the menu from a specified text file.
     Expected format: ItemName,Price (one item per line)
     Returns a dictionary with item names (Title Case) as keys and prices as values.
     """
-    # Use the absolute path to ensure Flask finds the file
     menu_filepath = os.path.join(os.path.dirname(__file__), 'menu.txt')
     menu_data = {}
     try:
@@ -36,8 +31,6 @@ def load_menu():
         return None
     return menu_data
 
-# --- Flask Routes (API Endpoints) ---
-
 @app.route('/')
 def index():
     """
@@ -59,16 +52,11 @@ def get_menu():
 
 @app.route('/api/order', methods=['POST'])
 def place_order():
-    """
-    API endpoint that receives an order from the frontend.
-    It calculates the total and prints it to the server's console.
-    """
     data = request.json
     order_items = data.get('items', [])
     menu_data = load_menu()
     total_cost = 0
 
-    # Basic validation and total calculation
     for item_data in order_items:
         item_name = item_data.get('item', '').strip().title()
         quantity = item_data.get('quantity')
@@ -87,7 +75,5 @@ def place_order():
     }
     return jsonify(response)
 
-# --- Main Execution Block ---
-# This block runs the Flask server when the file is executed
 if __name__ == '__main__':
     app.run(debug=True)
