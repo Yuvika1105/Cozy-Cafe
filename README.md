@@ -10,8 +10,6 @@ A charming little web-based cafe ordering system designed for **simplicity**, **
 - ➕ Add items to an order in real-time
 - 🧮 Auto-calculate total bill
 - ✅ Place an order and get a **cute confirmation pop-up**
-- 🐼 Adorable panda pops up with a "Thank you!" message
-
 ---
 
 ## 📸 Preview
